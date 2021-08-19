@@ -28,7 +28,7 @@
                                 <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Hi, @User.Identity.Name, Log out</a>
                             </li>
 
-                            @if (User.IsInRole("Admin") || User.IsInRole("editor"))
+                            @if (User.IsInRole("admin") || User.IsInRole("staff"))
                             {
                                 <li class="nav-item ml-1">
                                     <a asp-area="Admin" asp-controller="Pages" asp-action="Index" class="btn btn-success">Admin Area</a>

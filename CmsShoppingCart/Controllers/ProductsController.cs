@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 
 namespace CmsShoppingCart.Controllers
 {
-    [Authorize]
     public class ProductsController : Controller
     {
-
         private readonly CmsShoppingCartContext context;
 
         public ProductsController(CmsShoppingCartContext context)

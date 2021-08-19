@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CmsShoppingCart.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     [Area("Admin")]
     public class RolesController : Controller
     {
@@ -94,6 +94,31 @@ namespace CmsShoppingCart.Areas.Admin.Controllers
             }
 
             return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+        // try to create the delete role function
+        // GET /admin/roles/delete/5
+        public async Task<IActionResult> Delete(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = "Can't delete a null role";
+                return View("NotFound");
+            }
+            else
+            {
+
+                var result = await roleManager.DeleteAsync(role);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                return RedirectToAction("Index");
+            }
         }
 
     }

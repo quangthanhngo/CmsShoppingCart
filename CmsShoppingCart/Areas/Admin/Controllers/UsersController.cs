@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CmsShoppingCart.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     [Area("Admin")]
     public class UsersController : Controller
     {
@@ -24,5 +24,31 @@ namespace CmsShoppingCart.Areas.Admin.Controllers
         {
             return View(userManager.Users);
         }
+
+        // try to create the Delete User function
+        // GET /admin/roles/delete/5
+        public async Task<IActionResult> Delete(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = "Can't delete a null user";
+                return View("NotFound");
+            }
+            else
+            {
+
+                var result = await userManager.DeleteAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                return RedirectToAction("Index");
+            }
+        }
+
     }
 }
