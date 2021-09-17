@@ -55,6 +55,10 @@ namespace CmsShoppingCart.Controllers
                         ModelState.AddModelError("", error.Description);
                     }
                 }
+                // add default role
+                await userManager.AddToRoleAsync(appUser, "customer");
+                
+                // added default role
             }
 
             return View(user);

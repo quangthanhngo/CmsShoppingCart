@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CmsShoppingCart.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, staff")]
     [Area("Admin")]
     public class CategoriesController : Controller
     {

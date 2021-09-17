@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Register";
+    //Layout = null; // don't wanna share the shared layout
 }
 
 <h1>Register</h1>
@@ -28,6 +29,14 @@
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+
+            @*add confirm pwd*@
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            @*added confirm pwd*@
 
             <div class="form-group">
                 <input type="submit" value="Register" class="btn btn-primary" />

@@ -48,6 +48,10 @@
         $("a.addToCart").click(function (e) {
             e.preventDefault();
 
+            /*trythenewway*/
+            let ajaxDiv = $(this).parent().parent().find("div.ajaxbg");
+            ajaxDiv.removeClass("d-none");
+
             let id = $(this).data("id");
 
             $.get('/cart/add/' + id, {}, function (data) {
@@ -56,8 +60,10 @@
                 ajaxDiv.find("p").removeClass("d-none");
                 setTimeout(() => {
                     ajaxDiv.animate({ opacity: 0 }, function () {
-                        
-                        $(this).addClass("d-none").fadeTo(.1, 1);
+
+                        $(this).addClass("d-none").fadeTo(1000, 1.00);
+
+                        /*$(this).addClass("d-none").fadeTo(.1, 1);*/
                         $(this).find("img").removeClass("d-none");
                         $(this).find("p").addClass("d-none");
                     });

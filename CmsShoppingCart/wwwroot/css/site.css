@@ -148,3 +148,32 @@ li.nav-item.logout {
     right: 10px;
     list-style: none;
 }
+
+/*add some css to product img*/
+div.col-4 {
+    border: solid 1px #e9ecef;
+    padding: 15px 15px;
+}
+
+.w-100 {
+    margin-top: 32px;
+}
+
+/* Menu hover */
+li.list-group-item:hover {
+    background-color: antiquewhite;
+}
+
+/* carousel*/
+.carousel .carousel-item {
+    height: 240px;
+    transform: translateX(21%);
+}
+
+.carousel-item img {
+    position: absolute;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    min-height: 240px;
+}

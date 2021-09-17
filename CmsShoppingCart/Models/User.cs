@@ -15,8 +15,22 @@ namespace CmsShoppingCart.Models
         [Required, EmailAddress]
         public string Email { get; set; }
 
+        // add confirm pwd
+        [Display(Name = "Password")]
+        // added confirm pwd
+
         [DataType(DataType.Password), Required, MinLength(4, ErrorMessage = "Minimum length is 4")]
         public string Password { get; set; }
+
+        //add confirm pwd
+        [Required(ErrorMessage = "Please confirm your password")]
+        [Compare("Password", ErrorMessage = "Password does not match")]
+        [Display(Name = "Confirm Password")]
+        [DataType(DataType.Password)]
+        public string ConfirmPassword { get; set; }
+        // added confirm pwd
+       
+
     }
 
 
