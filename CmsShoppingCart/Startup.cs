@@ -17,9 +17,10 @@ namespace CmsShoppingCart
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfiguration configuration { get; }
+        public Startup(IConfiguration _configuration)
         {
-            Configuration = configuration;
+            configuration = _configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -27,12 +28,6 @@ namespace CmsShoppingCart
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // try to change default page
-            services.AddMvc().AddRazorPagesOptions(options =>
-            {
-                options.Conventions.AddPageRoute("/products/Index", "");
-            });
-            // tried to change default page
 
             services.AddMemoryCache();
             services.AddSession(options =>
@@ -45,7 +40,7 @@ namespace CmsShoppingCart
 
             services.AddControllersWithViews();
 
-            services.AddDbContext<CmsShoppingCartContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CmsShoppingCartContext")));
+            services.AddDbContext<CmsShoppingCartContext>(options => options.UseSqlServer(configuration.GetConnectionString("CmsShoppingCartContext")));
 
             services.AddIdentity<AppUser, IdentityRole>(options => {
 
@@ -54,6 +49,8 @@ namespace CmsShoppingCart
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireDigit = false;
+
+                options.SignIn.RequireConfirmedEmail = true;
 
             })
                     .AddEntityFrameworkStores<CmsShoppingCartContext>()
@@ -82,13 +79,13 @@ namespace CmsShoppingCart
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     "pages",
                     "{slug?}",
-                    defaults: new { controller = "Pages", action = "Page"}
+                    defaults: new { controller = "Pages", action = "Page" }
                    );
 
                 endpoints.MapControllerRoute(
@@ -100,7 +97,7 @@ namespace CmsShoppingCart
                 endpoints.MapControllerRoute(
                          name: "areas",
                          pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                         
+
                      );
 
                 endpoints.MapControllerRoute(

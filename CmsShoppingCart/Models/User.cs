@@ -8,6 +8,7 @@ namespace CmsShoppingCart.Models
 {
     public class User
     {
+
         [Required, MinLength(2, ErrorMessage = "Minimum length is 2")]
         [Display(Name = "Username")]
         public string UserName { get; set; }
@@ -29,8 +30,10 @@ namespace CmsShoppingCart.Models
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
         // added confirm pwd
-       
 
+        
+
+      
     }
 
 
